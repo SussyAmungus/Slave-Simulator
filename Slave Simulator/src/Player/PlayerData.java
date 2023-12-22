@@ -93,59 +93,111 @@ public class PlayerData {
 	
 	public void UpdateVelocity() {
 		
+		player.Xvelo = 0;
+		player.Yvelo = 0;
+		
 		
 		if(mRight == true) {
 			//testa = "CHANGED";
 			
-			player.Xvelo = -5;
-		}else if(mRight == false && mLeft == false) {
-			player.Xvelo = 0;
-			
-		}
-		if(mLeft == true) {
-			
-			player.Xvelo = 5;
-		}else if(mRight == false && mLeft == false) {
-			player.Xvelo = 0;
-			
-		}
-		if(mUp == true) {
-			
-			player.Yvelo = -5;
-		}else if(mUp == false && mDown == false) {
-			player.Yvelo = 0;
-			
-		}
-		if(mDown == true) {
-			
-			player.Yvelo = 5;
-		}else if(mUp == false && mDown == false) {
-			player.Yvelo = 0;
-			
+			player.Xvelo = player.Xvelo + -5;
 		}
 		
+		if(mLeft == true) {
+			//testa = "CHANGED";
+			
+			player.Xvelo = player.Xvelo + 5;
+		}
+		
+		if(mDown == true) {
+			//testa = "CHANGED";
+			
+			player.Yvelo = player.Yvelo + 5;
+		}
+		
+		if(mUp == true) {
+			//testa = "CHANGED";
+			
+			player.Yvelo = player.Yvelo + -5;
+		}
+		
+		if((mUp && mLeft) || (mUp && mRight) ||(mDown && mLeft) || (mDown && mRight)) {
+			
+			//has to be normalized but too lazy rn
+			
+			double xx = (player.Xvelo / 5);
+			double yy  = (player.Yvelo / 5);
+			
+			player.Xvelo = (int) (player.Xvelo / 2 + xx*2);
+			player.Yvelo = (int) (player.Yvelo / 2 + yy*2);
+			
+			
+			
+		}
 		
 	
 	}
+	
 	
 
 	
 	//moves player on velocity
 	public void movePlayer() {
 		
-		
-		
 		player.XPos = player.XPos + player.Xvelo;
 		player.YPos = player.YPos + player.Yvelo;
-
+		//animation for moving only
+		animate();
 	}
 	
+	
+	public void animate() {
+		
+		//kinda bug if changes velo anim doesnt go neutral, but anim override so not bug, i think
+		
+		if(player.Xvelo > 0 && player.Yvelo == 0){
+			
+		}else if(player.Xvelo < 0  && player.Yvelo == 0){
+			
+		}
+		
+		if(player.Yvelo > 0  && player.Xvelo == 0){
+			
+		}else if(player.Yvelo < 0  && player.Xvelo == 0){
+			player.animP.animUp();
+		}
+		
+		if(player.Yvelo < 0 && player.Xvelo > 0){
+			//up right
+			
+		}else if(player.Yvelo < 0 && player.Xvelo < 0){
+			//up left
+		}
+		
+		if(player.Yvelo > 0 && player.Xvelo > 0){
+			//down right
+			
+		}else if(player.Yvelo > 0 && player.Xvelo < 0){
+			//down left
+		}
+		
+		if(player.Yvelo == 0 && player.Xvelo == 0) {
+			player.animP.animIdle();
+			//neutral
+		}
+		
+		player.animP.animTickUp();
+		
+		
+	}
 	
 	
 	
 	public void CheckNdoUpdate() {
 		
 		movePlayer();
+		animate();
+		
 		
 	//	System.out.println(testa);
 		
