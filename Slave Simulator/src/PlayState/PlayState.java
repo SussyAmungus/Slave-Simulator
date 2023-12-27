@@ -11,6 +11,8 @@ public class PlayState {
 	
 	PlayerData PlayerData;
 	
+	MapManager MapManager;
+	
 	
 	
 
@@ -18,6 +20,7 @@ public class PlayState {
 		
 		PlayerData = PD;
 		
+		MapManager = new MapManager();
 		
 		
 	
@@ -38,6 +41,8 @@ public class PlayState {
 	
 	public void render(Graphics g) {
 		
+		
+		MapManager.renderMap(g);
 		PlayerData.selfRender(g);
 		
 		

@@ -198,6 +198,7 @@ public class PlayerData {
 		movePlayer();
 		animate();
 		
+		//next is actions animiiton updater or whatever will do logic and play animation, last animation will stick
 		
 	//	System.out.println(testa);
 		

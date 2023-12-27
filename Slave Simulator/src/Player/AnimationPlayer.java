@@ -134,6 +134,9 @@ public class AnimationPlayer {
 
 	public void checkAnimPlay(String testAnim) {
 		
+		
+		//ACTIONS that can have compouding with movement or other logic will ahve it where animtick doesnt reset IF its in the subgroup, playerdata iwll controll what aimation player show have
+		
 		if(currentAnim.equals(testAnim)) {
 			
 			//do nothing
