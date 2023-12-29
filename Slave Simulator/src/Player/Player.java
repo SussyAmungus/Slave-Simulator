@@ -28,7 +28,7 @@ public class Player extends Entity{
 
 	public Player(PlayerData PD) {
 		
-		super(10,10,10,10,10);
+		super(500,500,10,10,10);
 		PlayerData = PD;
 		
 		animP = new AnimationPlayer("/PlayerSprite.png",62, 82,12,31);
@@ -45,12 +45,52 @@ public class Player extends Entity{
 		
 	}
 	
+	public void renderSelfEdge(Graphics g, boolean XEdge, boolean YEdge) {
+		
+		int tempX = 0;
+		int tempY = 0;
+		
+		if(XEdge == true&& XPos < 1000){
+			
+			tempX = XPos;
+		}else if(XEdge == true && XPos >= 100) {
+		
+			tempX = XPos - 1000;
+			
+		
+		}else {
+			
+			tempX = 500 - XSize/2;
+			
+		}
+		
+		
+		if(YEdge == true&& YPos < 1000){
+			
+			tempY = YPos;
+		}else if(YEdge == true && YPos >= 1000) {
+		
+			tempY = YPos - 1000;
+		
+		}else {
+			
+			tempY = 500 - YSize/2;
+			
+		}
+		
 	
-	public void renderSelf(Graphics g) {
+		g.drawImage(animP.getFrame(), tempX, tempY, null);
 		
 		
+	
+	}
+	
+
+	public void renderSelfM(Graphics g) {
 		
-		g.drawImage(animP.getFrame(), XPos, YPos, null);
+	
+		//get middle gor now rough middle
+		g.drawImage(animP.getFrame(), 500 - XSize/2, 500 - XSize/2, null);
 	
 		
 	}

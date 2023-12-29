@@ -12,17 +12,34 @@ public class PlayerData {
 	public boolean mUp = false;
 	public boolean mDown = false;
 	
+	public boolean onEdgeX;
+	public boolean onEdgeY;
+	
+	
 	
 
 	public PlayerData() {
 		
 		player = new Player(this);
 	
+		onEdgeX = false;
+		onEdgeY = false;
+		System.out.println("ASDASD");
+		
 	}
 	//fix later
 	public void selfRender(Graphics g) {
 		
-		player.renderSelf(g);
+		if(onEdgeX || onEdgeY) {
+			
+			
+			player.renderSelfEdge(g, onEdgeX,onEdgeY);
+			
+		}else {
+			
+			player.renderSelfM(g);
+			
+		}
 		
 	}
 	
@@ -195,12 +212,15 @@ public class PlayerData {
 	
 	public void CheckNdoUpdate() {
 		
+	
+		
+		
 		movePlayer();
 		animate();
 		
 		//next is actions animiiton updater or whatever will do logic and play animation, last animation will stick
 		
-	//	System.out.println(testa);
+		
 		
 		
 		

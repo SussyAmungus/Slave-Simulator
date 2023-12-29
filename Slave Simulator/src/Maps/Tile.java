@@ -37,6 +37,12 @@ public class Tile {
 		
 	}
 	
+	public void screenRender(Graphics g, int x, int y) {
+		
+		g.drawImage(spirte, x, y, null);
+		
+	}
+	
 	
 	
 	
