@@ -27,7 +27,7 @@ public class PlayerData {
 		System.out.println("ASDASD");
 		
 	}
-	//fix later
+	//fix later // future leo --> idk
 	public void selfRender(Graphics g) {
 		
 		if(onEdgeX || onEdgeY) {

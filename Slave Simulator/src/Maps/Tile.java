@@ -11,8 +11,8 @@ public class Tile {
 	public int posx;
 	public int posy;
 	
-	public int sizeX = 20;
-	public int sizeY = 20;
+	public int sizeX = 50;
+	public int sizeY = 50;
 	
 	public BufferedImage spirte;
 	

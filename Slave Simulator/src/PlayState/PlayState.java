@@ -49,6 +49,8 @@ public class PlayState {
 		
 		PlayerData.selfRender(g);
 		
+		System.out.println(PlayerData.onEdgeY);
+		
 		
 	}
 	

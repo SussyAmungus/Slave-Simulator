@@ -12,8 +12,15 @@ import Maps.Water;
 
 public class Map {
 	
-	public int xsize;
-	public int ysize;
+	public int width;
+	public int height;
+	
+	private int TileSizeX = 50;
+	private int TileSizeY = 50;
+	
+	//cahnge later
+	public int XEdgeMark = 500;
+	public int YEdgeMark = 500;
 	
 	public Tile[][] mTiles;
 	
@@ -34,13 +41,16 @@ public class Map {
 		
 		
 		mTiles = new Tile[mapPng.getHeight()][mapPng.getWidth()];
+		width = mapPng.getWidth() * TileSizeX;
+		height = mapPng.getHeight() * TileSizeY;
 		
+	
 		
 		loadMap();
 		
 	}
 	
-	
+
 	
 	
 	//BTW goes y, x
@@ -53,7 +63,7 @@ public class Map {
 	public void loadMap() {
 		int currPosY = 0;
 		
-		System.out.println(mapPng.getRGB(0, 0));
+		//System.out.println(mapPng.getRGB(0, 0));
 		
 		
 		for(int i = 0; i < mTiles.length; i++) {
@@ -80,11 +90,11 @@ public class Map {
 					
 				}
 				
-				 currPosX =  currPosX + 20;
+				 currPosX =  currPosX + TileSizeX;
 				
 			}
 			
-			currPosY = currPosY +20;
+			currPosY = currPosY +TileSizeY;
 		}
 		
 		

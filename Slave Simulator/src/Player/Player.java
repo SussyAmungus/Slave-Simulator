@@ -40,24 +40,29 @@ public class Player extends Entity{
 	
 	}
 	
+	//def use this later of sum, prob call anim class to do sum
 	public void playAnim(int num1, int num2) {
 		
 		
 	}
+	
+	
+	int screenSizeX = 1000;
+	int screenSizeY = 1000;
+	
 	
 	public void renderSelfEdge(Graphics g, boolean XEdge, boolean YEdge) {
 		
 		int tempX = 0;
 		int tempY = 0;
 		
-		if(XEdge == true&& XPos < 1000){
-			
-			tempX = XPos;
-		}else if(XEdge == true && XPos >= 100) {
 		
-			tempX = XPos - 1000;
+		if(XEdge == true) {
 			
-		
+			
+			tempX = (int)((double)XPos / (double)screenSizeX * screenSizeX);
+			
+			
 		}else {
 			
 			tempX = 500 - XSize/2;
@@ -65,13 +70,12 @@ public class Player extends Entity{
 		}
 		
 		
-		if(YEdge == true&& YPos < 1000){
+		if(YEdge == true) {
 			
-			tempY = YPos;
-		}else if(YEdge == true && YPos >= 1000) {
-		
-			tempY = YPos - 1000;
-		
+			
+			tempY = (int)((double)YPos / (double)screenSizeY * screenSizeY);
+			
+			
 		}else {
 			
 			tempY = 500 - YSize/2;

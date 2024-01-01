@@ -29,8 +29,7 @@ public class MapManager {
 	
 	
 	
-	
-	
+	//never gets called, all map renders are on camera
 	public void renderMap(Graphics g) {
 		
 		for(int i = 0; i < curr.mTiles.length; i++) {

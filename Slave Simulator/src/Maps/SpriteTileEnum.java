@@ -7,9 +7,10 @@ import javax.imageio.ImageIO;
 
 public enum SpriteTileEnum {
 	
-	dirt("/Dirt1.png"),
-	water("/Water1.png"),
-	deflutT("/Defult_Sprite.png");
+	dirt("/Dirt2.png"),
+	water("/Water2.png"),
+	deflutT("/TestSprite.png"),
+	grass("/Grass.png");
 	
 	BufferedImage picture;
 	
