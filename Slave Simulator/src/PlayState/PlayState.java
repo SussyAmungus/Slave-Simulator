@@ -47,9 +47,10 @@ public class PlayState {
 		
 		Camera.renderAll(g);
 		
-		PlayerData.selfRender(g);
+		PlayerData.selfRender(g,Camera);
 		
-		System.out.println(PlayerData.onEdgeY);
+	
+
 		
 		
 	}
@@ -57,10 +58,10 @@ public class PlayState {
 	
 	public void update() {
 		
-		//calculate all player stuff
+	
 		Camera.checkIfEdge();
 		
-	//	System.out.println(PlayerData.onEdgeY);
+
 		PlayerData.CheckNdoUpdate();
 		
 		

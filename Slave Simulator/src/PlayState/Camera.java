@@ -14,8 +14,15 @@ public class Camera {
 	MapManager MapManager;
 	PlayerData PlayerData;
 	
+	//top right corner 
 	public int CamX = 0;
 	public int CamY = 0;
+	
+	public int focalX = 0;
+	public int focalY = 0;
+	
+	public int focusMode = 1;
+	
 	
 	public int renderBoundsX = 550;
 	public int renderBoundsY = 550;
@@ -40,24 +47,31 @@ public class Camera {
 	//pls fix put way to see how map bounds are
 	public void checkIfEdge() {
 		
-		if(PlayerData.player.XPos <= MapManager.curr.XEdgeMark - PlayerData.player.XSize/2 || PlayerData.player.XPos >= MapManager.curr.width - MapManager.curr.XEdgeMark  - PlayerData.player.XSize/2 ) {
+		
+		if(focusMode == 1) {
+		
+		if(PlayerData.player.getMidXPos() <= MapManager.curr.XEdgeMark || PlayerData.player.XPos>=  MapManager.curr.width - MapManager.curr.XEdgeMark) {
 			PlayerData.onEdgeX = true;
 			
+			
 		}else {
+			focalX = PlayerData.player.XPos;
 			
 			PlayerData.onEdgeX = false;
+			CamX = focalX - BufferX;
 			
 		}
 		
-		if(PlayerData.player.YPos <= MapManager.curr.YEdgeMark - PlayerData.player.YSize/2  || PlayerData.player.YPos >= MapManager.curr.height - MapManager.curr.YEdgeMark - PlayerData.player.YSize/2 ) {
+		if(PlayerData.player.getMidYPos() <= MapManager.curr.YEdgeMark || PlayerData.player.getMidYPos() - 49 >= MapManager.curr.height - MapManager.curr.YEdgeMark) {
 			PlayerData.onEdgeY = true;
 			
 		}else {
 			
 			PlayerData.onEdgeY = false;
-			
+			focalY = PlayerData.player.YPos;
+			CamY = focalY - BufferY;
 		}
-		
+		}
 		
 	}
 	
@@ -66,112 +80,47 @@ public class Camera {
 	//player allready renders if on edgde or nah
 	public void renderAll(Graphics g) {
 		
-		if(PlayerData.onEdgeX || PlayerData.onEdgeY) {
+		if(focusMode == 1) {
 			
-			
-			
-			renderEdge(g);
-			
-		}else {//Other condition camera on person
-			
-			
-			 renderCenter(g);
+			renderPlayerFocus(g);
 			
 		}
 		
 		
 	}
 	
-	//basicaly is also equipped with the center render stuff too
-	public void renderEdge(Graphics g) {
+	public void renderPlayerFocus(Graphics g) {
+		//System.out.println(CamX);
+	for(int i = 0; i < MapManager.curr.mTiles.length; i++) {
 		
-		for(int i = 0; i < MapManager.curr.mTiles.length; i++) {
-			
-			
-			
-			for(int j = 0; j < MapManager.curr.mTiles[i].length; j++) {
+		for(int j = 0; j < MapManager.curr.mTiles[i].length; j++) {
+			//the minus 50 is a little but of buffer to render stuff allite out no now
+			if(MapManager.curr.mTiles[j][i].posx >= CamX - 50 && MapManager.curr.mTiles[j][i].posx <= CamX +  screenSizeX&& 
+					MapManager.curr.mTiles[j][i].posy >= CamY - 50 && MapManager.curr.mTiles[j][i].posy <= CamY +  screenSizeY){
 				
-				//litteraly just render bounds
-				int spaceX = renderBoundsX;
-				int spaceY = renderBoundsY;
+				int Xrelative = MapManager.curr.mTiles[j][i].posx - CamX;
+				int Yrelative = MapManager.curr.mTiles[j][i].posy - CamY;
 				
-					
-				if(PlayerData.onEdgeX == true) {
-					
-					spaceX = Math.abs(screenSizeX - PlayerData.player.XPos);
-				}
-				if(PlayerData.onEdgeY == true) {
-					
-					spaceY = Math.abs(screenSizeY - PlayerData.player.YPos);
-				}
-					
-							
-							
-	
+				double screenXratio = ((double)Xrelative) / ((double)screenSizeX);
+				double screenYratio = ((double)Yrelative) / ((double)screenSizeY);
 				
-				if( MapManager.curr.mTiles[j][i].posx <= PlayerData.player.XPos + spaceX && MapManager.curr.mTiles[j][i].posx >= PlayerData.player.XPos - spaceX &&
-						MapManager.curr.mTiles[j][i].posy <= PlayerData.player.YPos + spaceY && MapManager.curr.mTiles[j][i].posy >= PlayerData.player.YPos - spaceY	) {
-					
-					
-					int screenX = MapManager.curr.mTiles[j][i].posx - PlayerData.player.XPos + BufferX;
-					int screenY = MapManager.curr.mTiles[j][i].posy - PlayerData.player.YPos + BufferY;
-					
-					
-					double ratioX = (double)MapManager.curr.mTiles[j][i].posx / (double)screenSizeX;
-					double ratioY = (double)MapManager.curr.mTiles[j][i].posy / (double)screenSizeY;
-					
-					double scaleX = (double)screenSizeX / ratioX;
-					double scaleY = (double)screenSizeY / ratioY;
-					
-					if(PlayerData.onEdgeX == true) {
-						
-						screenX = (int) (ratioX * scaleX);
-					}
-					
-					if(PlayerData.onEdgeY == true) {
-						
-						screenY = (int) (ratioY * scaleY);
-					}
-					
-					
-					MapManager.curr.mTiles[j][i].screenRender(g,screenX,screenY);
-					 printdebug(g, MapManager.curr.mTiles[j][i] ,screenX, screenY);
-				}
-			}
-			
-		}
-		
-	}
-	
-	
-	
-	
-	
-	
-	public void renderCenter(Graphics g) {
-		
-		
-		for(int i = 0; i < MapManager.curr.mTiles.length; i++) {
-			
-			for(int j = 0; j < MapManager.curr.mTiles[i].length; j++) {
+				int screenX = (int) (screenXratio * screenSizeX);
+				int screenY = (int) (screenYratio * screenSizeY);
 				
-				if( MapManager.curr.mTiles[j][i].posx <= PlayerData.player.XPos + renderBoundsX &&MapManager.curr.mTiles[j][i].posx > PlayerData.player.XPos - renderBoundsX &&
-						MapManager.curr.mTiles[j][i].posy < PlayerData.player.YPos + renderBoundsY && MapManager.curr.mTiles[j][i].posy > PlayerData.player.YPos - renderBoundsY	) {
-					
-					int screenX = MapManager.curr.mTiles[j][i].posx - PlayerData.player.XPos + BufferX;
-					int screenY = MapManager.curr.mTiles[j][i].posy - PlayerData.player.YPos + BufferY;
-					
-					 MapManager.curr.mTiles[j][i].screenRender(g, screenX, screenY);
-						 printdebug(g, MapManager.curr.mTiles[j][i] ,screenX, screenY);
-				}
+				
+				 MapManager.curr.mTiles[j][i].screenRender(g, screenX, screenY);
+			//	printdebug(g, MapManager.curr.mTiles[j][i] ,screenX, screenY);
+				
+				
 				
 				
 			}
-			
-		
 		}
-		
+
 	}
+
+	}
+	
 	
 	public void printdebug(Graphics g, Tile tt, int x, int y) {
 		

@@ -30,6 +30,9 @@ public class Entity {
 		XSize = XS;
 		YSize = YS;
 		
+		MXPos = XPos + (XSize /2);
+		MYPos = YPos + (YSize /2);
+		
 		this.speed = speed;
 		
 		
@@ -39,6 +42,19 @@ public class Entity {
 	
 		
 	}
+	
+	
+	public int getMidXPos() {
+		
+		
+		return XPos + (XSize /2);
+	}
+	public int getMidYPos() {
+		
+		
+		return YPos + (YSize /2);
+	}
+	
 	
 	public void collision() {
 		

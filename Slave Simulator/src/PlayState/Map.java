@@ -7,6 +7,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import Maps.Dirt;
+import Maps.Grass;
 import Maps.Tile;
 import Maps.Water;
 
@@ -40,7 +41,7 @@ public class Map {
 		
 		
 		
-		mTiles = new Tile[mapPng.getHeight()][mapPng.getWidth()];
+		mTiles = new Tile[mapPng.getWidth()][mapPng.getHeight()];
 		width = mapPng.getWidth() * TileSizeX;
 		height = mapPng.getHeight() * TileSizeY;
 		
@@ -58,19 +59,24 @@ public class Map {
 	//-14451456 green tree
 	// -10214656 dirt
 	// -16776961 water
+	// -16711936 grass
 	
 	
 	public void loadMap() {
 		int currPosY = 0;
 		
-		//System.out.println(mapPng.getRGB(0, 0));
+		
 		
 		
 		for(int i = 0; i < mTiles.length; i++) {
 			
-		
+			int count = 0;
 			int currPosX = 0;
 			for(int j = 0; j< mTiles[i].length; j++) {
+				
+				
+				
+				
 				
 				boolean isTile = false;
 				
@@ -84,6 +90,13 @@ public class Map {
 					mTiles[j][i] = new Water(currPosX,currPosY);
 					isTile = true;
 				}
+				if(mapPng.getRGB(j, i) == -16711936) {
+					
+					mTiles[j][i] = new Grass(currPosX,currPosY);
+					isTile = true;
+				}
+				
+				
 				if(isTile == false){
 					
 					mTiles[j][i] = new Tile(currPosX,currPosY);
@@ -92,8 +105,11 @@ public class Map {
 				
 				 currPosX =  currPosX + TileSizeX;
 				
-			}
+				
 			
+				 
+			}
+	
 			currPosY = currPosY +TileSizeY;
 		}
 		

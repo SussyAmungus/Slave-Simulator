@@ -3,6 +3,8 @@ package Player;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
+import PlayState.Camera;
+
 public class PlayerData {
 	
 	public volatile Player player;
@@ -28,18 +30,9 @@ public class PlayerData {
 		
 	}
 	//fix later // future leo --> idk
-	public void selfRender(Graphics g) {
+	public void selfRender(Graphics g, Camera cam) {
 		
-		if(onEdgeX || onEdgeY) {
-			
-			
-			player.renderSelfEdge(g, onEdgeX,onEdgeY);
-			
-		}else {
-			
-			player.renderSelfM(g);
-			
-		}
+		player.selfRender(g, cam);
 		
 	}
 	

@@ -1,23 +1,13 @@
 package Player;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
-
-import Helper.ImageResizer;
+import PlayState.Camera;
 import Super.Entity;
 
 public class Player extends Entity{
 	
 	//prob atlater date we have a sprite sheet
 	PlayerData PlayerData;
-	
-	
-	
-	
-	
 	
 	AnimationPlayer animP;
 	
@@ -49,6 +39,28 @@ public class Player extends Entity{
 	
 	int screenSizeX = 1000;
 	int screenSizeY = 1000;
+	
+	
+	public void selfRender(Graphics g, Camera cam) {
+		
+		
+		
+		int Xrelative = XPos - cam.CamX;
+		int Yrelative = YPos - cam.CamY;
+		
+		double screenXratio = Xrelative / screenSizeX;
+		double screenYratio = Yrelative / screenSizeY;
+		
+		
+		int screenX = (int) (screenXratio * screenSizeX);
+		int screenY = (int) (screenYratio * screenSizeY);
+		
+		g.drawImage(animP.getFrame(), Xrelative, Yrelative ,null);
+		
+		
+		
+		
+	}
 	
 	
 	public void renderSelfEdge(Graphics g, boolean XEdge, boolean YEdge) {
