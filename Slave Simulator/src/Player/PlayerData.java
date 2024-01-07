@@ -3,6 +3,8 @@ package Player;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
+import PlayState.Camera;
+
 public class PlayerData {
 	
 	public volatile Player player;
@@ -12,17 +14,25 @@ public class PlayerData {
 	public boolean mUp = false;
 	public boolean mDown = false;
 	
+	public boolean onEdgeX;
+	public boolean onEdgeY;
+	
+	
 	
 
 	public PlayerData() {
 		
 		player = new Player(this);
 	
-	}
-	//fix later
-	public void selfRender(Graphics g) {
+		onEdgeX = false;
+		onEdgeY = false;
+		System.out.println("ASDASD");
 		
-		player.renderSelf(g);
+	}
+	//fix later // future leo --> idk
+	public void selfRender(Graphics g, Camera cam) {
+		
+		player.selfRender(g, cam);
 		
 	}
 	
@@ -195,11 +205,15 @@ public class PlayerData {
 	
 	public void CheckNdoUpdate() {
 		
+	
+		
+		
 		movePlayer();
 		animate();
 		
+		//next is actions animiiton updater or whatever will do logic and play animation, last animation will stick
 		
-	//	System.out.println(testa);
+		
 		
 		
 		

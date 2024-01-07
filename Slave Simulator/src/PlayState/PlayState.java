@@ -11,6 +11,10 @@ public class PlayState {
 	
 	PlayerData PlayerData;
 	
+	MapManager MapManager;
+	
+	Camera Camera;
+	
 	
 	
 
@@ -18,8 +22,9 @@ public class PlayState {
 		
 		PlayerData = PD;
 		
+		MapManager = new MapManager();
 		
-		
+		Camera = new Camera(MapManager,PlayerData);
 	
 	}
 	
@@ -38,7 +43,14 @@ public class PlayState {
 	
 	public void render(Graphics g) {
 		
-		PlayerData.selfRender(g);
+		//Map n stuff
+		
+		Camera.renderAll(g);
+		
+		PlayerData.selfRender(g,Camera);
+		
+	
+
 		
 		
 	}
@@ -46,7 +58,10 @@ public class PlayState {
 	
 	public void update() {
 		
-		//calculate all player stuff
+	
+		Camera.checkIfEdge();
+		
+
 		PlayerData.CheckNdoUpdate();
 		
 		
