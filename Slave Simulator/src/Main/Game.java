@@ -16,6 +16,12 @@ public class Game implements Runnable{
 	public GameWindow Gwindow;
 	
 	public PlayerData PlayerData;
+	public EventManager EventManger;
+	
+	public boolean paused = false;
+	
+	
+	public GameTimer GameTimer;
 	
 	
 	
@@ -44,6 +50,11 @@ public class Game implements Runnable{
 		
 		
 		PlayState = new PlayState(PlayerData);
+		
+		
+		GameTimer = new GameTimer();
+		
+		EventManger = new EventManager(GameTimer);
 		
 		//end of all thread1
 		
@@ -121,6 +132,17 @@ public class Game implements Runnable{
 
 
 	void update() {
+		
+		if(paused == false) {
+			
+			GameTimer.updateGameTicker();
+			EventManger.UpdateEvents();
+			
+			
+		}
+		
+		
+		
 		
 		if(PlayState == null) {
 			return;

@@ -12,7 +12,7 @@ public enum SpriteTileEnum {
 	deflutT("/TestSprite.png"),
 	grass("/Grass.png");
 	
-	BufferedImage picture;
+	public BufferedImage picture;
 	
 	SpriteTileEnum(String source){
 		
