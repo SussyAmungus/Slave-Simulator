@@ -25,7 +25,7 @@ public class Map {
 	
 	public Tile[][] mTiles;
 	
-	InputStream is;
+	
 	
 	BufferedImage mapPng;
 	
@@ -70,7 +70,7 @@ public class Map {
 		
 		for(int i = 0; i < mTiles.length; i++) {
 			
-			int count = 0;
+		
 			int currPosX = 0;
 			for(int j = 0; j< mTiles[i].length; j++) {
 				
@@ -78,30 +78,26 @@ public class Map {
 				
 				
 				
-				boolean isTile = false;
+				
 				
 				if(mapPng.getRGB(j, i) == -10214656) {
 					
 					mTiles[j][i] = new Dirt(currPosX,currPosY);
-					isTile = true;
+					
 				}
 				if(mapPng.getRGB(j, i) == -16776961) {
 					
 					mTiles[j][i] = new Water(currPosX,currPosY);
-					isTile = true;
+					
 				}
 				if(mapPng.getRGB(j, i) == -16711936) {
 					
 					mTiles[j][i] = new Grass(currPosX,currPosY);
-					isTile = true;
+					
 				}
 				
 				
-				if(isTile == false){
-					
-					mTiles[j][i] = new Tile(currPosX,currPosY);
-					
-				}
+				
 				
 				 currPosX =  currPosX + TileSizeX;
 				

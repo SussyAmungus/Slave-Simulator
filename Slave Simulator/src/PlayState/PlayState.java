@@ -13,6 +13,8 @@ public class PlayState {
 	
 	MapManager MapManager;
 	
+	StructureManager StructureManager;
+	
 	Camera Camera;
 	
 	
@@ -24,7 +26,9 @@ public class PlayState {
 		
 		MapManager = new MapManager();
 		
-		Camera = new Camera(MapManager,PlayerData);
+		StructureManager = new StructureManager();
+		
+		Camera = new Camera(MapManager,PlayerData,StructureManager);
 	
 	}
 	
