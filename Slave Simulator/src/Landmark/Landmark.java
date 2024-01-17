@@ -1,6 +1,6 @@
-package Events;
+package Landmark;
 
-public abstract class Event {
+public abstract class Landmark {
 	
 	public int Year;
 	public int day;
@@ -9,7 +9,7 @@ public abstract class Event {
 	public int month;
 	
 	
-	public Event(int y, int mo, int d, int h, int m) {
+	public Landmark(int y, int mo, int d, int h, int m) {
 		
 		Year = y;
 		month = m;

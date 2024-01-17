@@ -14,6 +14,7 @@ public class Camera {
 	MapManager MapManager;
 	StructureManager StructureManager;
 	PlayerData PlayerData;
+	ObjectManager ObjectManager;
 	
 	//top right corner 
 	public int CamX = 0;
@@ -36,12 +37,12 @@ public class Camera {
 	public int BufferY = 500;
 	
 	
-	public Camera(MapManager mm, PlayerData pd, StructureManager sm) {
+	public Camera(MapManager mm, PlayerData pd, StructureManager sm, ObjectManager om) {
 		
 		MapManager = mm;
 		PlayerData = pd;
 		StructureManager = sm;
-		
+		ObjectManager = om;
 		
 	}
 	
@@ -133,6 +134,31 @@ public class Camera {
 		
 		
 	}
+	
+	
+	for(int i = 0 ; i < ObjectManager.RM.curr.ReList.size(); i++) {
+		
+		
+		
+		
+		int Xrelative = ObjectManager.RM.curr.ReList.get(i).posx - CamX;
+		int Yrelative = ObjectManager.RM.curr.ReList.get(i).posy - CamY;
+		
+		double screenXratio = ((double)Xrelative) / ((double)screenSizeX);
+		double screenYratio = ((double)Yrelative) / ((double)screenSizeY);
+		
+		int screenX = (int) (screenXratio * screenSizeX);
+		int screenY = (int) (screenYratio * screenSizeY);
+		
+		
+		ObjectManager.RM.curr.ReList.get(i).screenRender(g, screenX, screenY);
+		
+	}
+	
+	
+	
+	
+	
 
 	}
 	

@@ -1,6 +1,8 @@
-package Events;
+package Landmark;
 
-public interface EventFunction {
+
+
+public interface LandmarkFunctions {
 
 	public void PlayEvent();
 	

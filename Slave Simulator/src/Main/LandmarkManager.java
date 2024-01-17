@@ -1,26 +1,26 @@
+
 package Main;
 
 import java.util.ArrayList;
 
-import EventList.PizzaTimeEvent;
-import Events.EventFunction;
+import Landmark.LandmarkFunctions;
 
 
-public class EventManager {
+public class LandmarkManager {
 	
 	
 	GameTimer gt;
 	
-	ArrayList<EventFunction> MajorEventList;
-	ArrayList<EventFunction> ReList;
+	ArrayList<LandmarkFunctions> MajorLandList;
+	ArrayList<LandmarkFunctions> ReList;
 
-	public EventManager(GameTimer gt) {
+	public LandmarkManager(GameTimer gt) {
 		
 		this.gt = gt;
 		
-		MajorEventList = new ArrayList<EventFunction>();
+		MajorLandList = new ArrayList<LandmarkFunctions>();
 		
-		ReList = new ArrayList<EventFunction>();
+		ReList = new ArrayList<LandmarkFunctions>();
 		
 		//ReList.add(new PizzaTimeEvent(0, 0, 0, 0, 0));
 		
@@ -40,11 +40,11 @@ public class EventManager {
 		
 		
 		
-		for(int i = 0; i < MajorEventList.size(); i++) {
+		for(int i = 0; i < MajorLandList.size(); i++) {
 			
-			if(MajorEventList.get(i).trigger(year, month, day, hour, minute));
+			if(MajorLandList.get(i).trigger(year, month, day, hour, minute));
 			
-			MajorEventList.get(i).PlayEvent();
+			MajorLandList.get(i).PlayEvent();
 			
 		}
 		

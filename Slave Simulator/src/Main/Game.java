@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import PlayState.PlayState;
-
 import Player.PlayerData;
 
 public class Game implements Runnable{
@@ -16,7 +15,7 @@ public class Game implements Runnable{
 	public GameWindow Gwindow;
 	
 	public PlayerData PlayerData;
-	public EventManager EventManger;
+	public LandmarkManager LandmarkManager;
 	
 	public boolean paused = false;
 	
@@ -54,7 +53,7 @@ public class Game implements Runnable{
 		
 		GameTimer = new GameTimer();
 		
-		EventManger = new EventManager(GameTimer);
+		LandmarkManager = new LandmarkManager(GameTimer);
 		
 		//end of all thread1
 		
@@ -136,8 +135,7 @@ public class Game implements Runnable{
 		if(paused == false) {
 			
 			GameTimer.updateGameTicker();
-			EventManger.UpdateEvents();
-			
+			LandmarkManager.UpdateEvents();
 			
 		}
 		
@@ -151,6 +149,7 @@ public class Game implements Runnable{
 		if(State.equals("Playing")) {
 			
 			PlayState.update();
+			
 		}
 		
 		
