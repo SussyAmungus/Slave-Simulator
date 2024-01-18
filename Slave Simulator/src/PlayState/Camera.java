@@ -3,9 +3,11 @@ package PlayState;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import Maps.Tile;
 import Player.PlayerData;
+import Super.Obj;
 
 
 //Not a tanglibe object, but a translation method for antything rendering except player,  
@@ -93,6 +95,9 @@ public class Camera {
 	
 	public void renderPlayerFocus(Graphics g) {
 		//System.out.println(CamX);
+	
+		
+		//tile render
 	for(int i = 0; i < MapManager.curr.mTiles.length; i++) {
 		
 		for(int j = 0; j < MapManager.curr.mTiles[i].length; j++) {
@@ -136,32 +141,42 @@ public class Camera {
 	}
 	
 	
+	
 	for(int i = 0 ; i < ObjectManager.RM.curr.ReList.size(); i++) {
 		
+		ObjectManager.RM.curr.ReList.get(i).screenRender(g, getScreenX(ObjectManager.RM.curr.ReList.get(i).posx), getScreenY(ObjectManager.RM.curr.ReList.get(i).posy) );
 		
-		
-		
-		int Xrelative = ObjectManager.RM.curr.ReList.get(i).posx - CamX;
-		int Yrelative = ObjectManager.RM.curr.ReList.get(i).posy - CamY;
-		
-		double screenXratio = ((double)Xrelative) / ((double)screenSizeX);
-		double screenYratio = ((double)Yrelative) / ((double)screenSizeY);
-		
-		int screenX = (int) (screenXratio * screenSizeX);
-		int screenY = (int) (screenYratio * screenSizeY);
-		
-		
-		ObjectManager.RM.curr.ReList.get(i).screenRender(g, screenX, screenY);
-		
-	}
+		}
 	
-	
-	
+for(int i = 0 ; i < ObjectManager.CM.CropList.size(); i++) {
+		
+	ObjectManager.CM.CropList.get(i).screenRender(g, getScreenX(ObjectManager.CM.CropList.get(i).posx), getScreenY(ObjectManager.CM.CropList.get(i).posy) );
+		
+		}
 	
 	
 
 	}
 	
+	
+	public int getScreenX(int x) {
+		
+		
+		int Xrelative =  x - CamX;
+		double screenXratio = ((double)Xrelative) / ((double)screenSizeX);
+		
+		int screenX = (int) (screenXratio * screenSizeX);
+		
+		return screenX;
+	}
+	
+public int getScreenY(int y) {
+		
+		int Yrelative = y - CamY;
+		double screenYratio = ((double)Yrelative) / ((double)screenSizeY);
+		int screenY = (int) (screenYratio * screenSizeY);
+		return screenY;
+	}
 	
 	public void printdebug(Graphics g, Tile tt, int x, int y) {
 		

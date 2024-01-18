@@ -6,12 +6,13 @@ public class ObjectManager {
 	//eg resources are objects, crops are objects, event triggers are objects, antything interactable by player or slaves
 	
 	ResourceManager RM;
+	CropManager CM;
 	
 	
 	public ObjectManager() {
 		
 		RM = new ResourceManager();
-		
+		CM = new CropManager();
 		
 	}
 	
@@ -24,6 +25,8 @@ public class ObjectManager {
 		
 		
 	}
+	
+	//public void render 
 	
 
 }
